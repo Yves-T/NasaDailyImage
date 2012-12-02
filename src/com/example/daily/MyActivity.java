@@ -63,7 +63,7 @@ public class MyActivity extends Activity {
         @Override
         protected NasaItem doInBackground(Object... objects) {
 
-            NasaParser nasaParser =  NasaParser.getInstance();
+            NasaParser nasaParser = NasaParser.getInstance();
             try {
                 String NASA_URL = "http://www.nasa.gov/rss/image_of_the_day.rss";
                 nasaParser.parse(new URL(NASA_URL).openStream());
