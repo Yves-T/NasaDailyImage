@@ -1,7 +1,5 @@
 package com.example.daily;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.sax.*;
 import android.util.Xml;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -10,9 +8,6 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 class NasaParser {
     private String mTitle;
@@ -79,7 +74,7 @@ class NasaParser {
 
     public void onItem(String title, String description, String date, String imageUrl) {
         // handle the parsed data
-        NasaItem nasaItem = new NasaItem(title, StringEscapeUtils.unescapeHtml4(description), mDate, getBitmap(mImageUrl));
+        NasaItem nasaItem = new NasaItem(title, StringEscapeUtils.unescapeHtml4(description), mDate, ImageUtil.getBitmap(mImageUrl));
         setNasaItem(nasaItem);
     }
 
@@ -97,23 +92,5 @@ class NasaParser {
 
     public String getmImageUrl() {
         return mImageUrl;
-    }
-
-    // convert url to bitmap
-    private Bitmap getBitmap(String url) {
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap bitmap = BitmapFactory.decodeStream(input);
-            input.close();
-            return bitmap;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }
