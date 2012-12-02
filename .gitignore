@@ -1,1 +1,9 @@
 .idea
+/ant.properties
+/build.xml
+/daily.iml
+/gen/
+/out/
+/local.properties
+/project.properties
+/proguard-project.txt
