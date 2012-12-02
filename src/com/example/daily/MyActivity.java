@@ -21,14 +21,15 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        refreshFromFeed();
     }
 
     public void onRefresh(View view) {
-        pd = ProgressDialog.show(this, "Search", "Searching...", true, false);
         refreshFromFeed();
     }
 
     private void refreshFromFeed() {
+        pd = ProgressDialog.show(this, "Load", "Loading...", true, false);
         // fetch the xml file and parse it
         try {
             new DownloadImageTask().execute("").get();
