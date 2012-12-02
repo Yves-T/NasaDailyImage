@@ -20,6 +20,18 @@ class NasaParser {
     private String mDate;
     private String mImageUrl;
     private NasaItem nasaItem;
+    private static NasaParser uniqueInstance;
+
+    private NasaParser() {
+
+    }
+
+    public static NasaParser getInstance() {
+        if(uniqueInstance == null) {
+            uniqueInstance = new NasaParser();
+        }
+        return uniqueInstance;
+    }
 
     public NasaItem getNasaItem() {
         return nasaItem;
