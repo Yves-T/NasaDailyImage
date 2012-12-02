@@ -2,6 +2,8 @@ package com.example.daily;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,22 @@ public class MyActivity extends Activity {
 
     public void onRefresh(View view) {
         refreshFromFeed();
+    }
+
+    // onClickhandler for wallpaper button
+    public void onSetWallpaper(View view) {
+        Thread th = new Thread() {
+            public void run() {
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(MyActivity.this);
+                Bitmap bitmap = ImageUtil.getBitmap(NasaParser.getInstance().getmImageUrl());
+                try {
+                    wallpaperManager.setBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        th.start();
     }
 
     private void refreshFromFeed() {
